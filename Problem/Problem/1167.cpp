@@ -28,20 +28,6 @@ int main()
 		}
 	}
 
-	int start = 1;
-
-	int* dis = new int[n + 1]();
-
-	for (int i = 1; i <= n; i++)
-	{
-
-	}
-
-
-	//특정 점에서 가장 먼 점을 구한다
-
-	//그 점에서 가장 먼 점까지의 거리를 출력한다
-
 
 	return 0;
 }
