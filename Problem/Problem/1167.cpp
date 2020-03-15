@@ -4,12 +4,16 @@
 
 using namespace std;
 
+bool chk[100001];
+int dis[100001];
+
 int main()
 {
 	cin.tie(0);
 	cin.sync_with_stdio(false);
 
-	int n, x, y = 1, bigNode = 1, leng = 0, bigNode2 = 1, leng2 = 0;
+	queue <int> que;
+	int n, x, y = 1, bigNode = 0, leng = 0;
 
 	cin >> n;
 
@@ -32,10 +36,6 @@ int main()
 		}
 	}
 
-	queue <int> que;
-	bool* chk = new bool[n + 1]();
-	int* dis = new int[n + 1]();
-
 	que.push(1);
 
 	while (que.size())
@@ -53,6 +53,7 @@ int main()
 				if (dis[arr[node][j]] > leng)
 				{
 					bigNode = arr[node][j];
+					leng = dis[arr[node][j]];
 				}
 			}
 		}
@@ -60,13 +61,16 @@ int main()
 		que.pop();
 	}
 
-	delete[] chk;
-	delete[] dis;
-
-	bool* chk2 = new bool[n + 1]();
-	int* dis2 = new int[n + 1]();
-
 	que.push(bigNode);
+
+	bigNode = 0;
+	leng = 0;
+
+	for (int i = 1; i <= n; i++)
+	{
+		chk[i] = false;
+		dis[i] = 0;
+	}
 
 	while (que.size())
 	{
@@ -74,25 +78,23 @@ int main()
 
 		for (int j = 0; j < arr[node].size(); j += 2)
 		{
-			if (chk2[arr[node][j]] == false)
+			if (chk[arr[node][j]] == false)
 			{
 				que.push(arr[node][j]);
 
-				dis2[arr[node][j]] = dis2[node] + arr[node][j + 1];
+				dis[arr[node][j]] = dis[node] + arr[node][j + 1];
 
-				if (dis2[arr[node][j]] > leng2)
+				if (dis[arr[node][j]] > leng)
 				{
-					leng2 = dis2[arr[node][j]];
+					leng = dis[arr[node][j]];
 				}
 			}
 		}
-		chk2[node] = true;
+		chk[node] = true;
 		que.pop();
 	}
 
-	cout << leng2;
+	cout << leng;
 
-	delete[] chk2;
-	delete[] dis2;
 	return 0;
 }
