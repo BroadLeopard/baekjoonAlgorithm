@@ -22,6 +22,12 @@ int main()
 
 		int mul = 1;
 
+		if (n == 0)
+		{
+			cout << 0 << endl;
+			continue;
+		}
+
 		cin >> a >> b;
 
 		x.push_back({ b,1 });
